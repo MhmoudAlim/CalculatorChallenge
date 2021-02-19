@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Calculator Challenge</string>
+    <string name="please_enter_the_second_operand">please enter the second operand</string>
+    <string name="multiply">×</string>
+    <string name="divide">÷</string>
+    <string name="minus">−</string>
+    <string name="plus">+</string>
+    <string name="undo">Undo</string>
+    <string name="redo">Redo</string>
+    <string name="equal">=</string>
+    <string name="result">Result =</string>
 </resources>
