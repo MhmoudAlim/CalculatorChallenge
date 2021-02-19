@@ -11,8 +11,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
         android:text="@string/result"
-        android:textSize="18sp"
+        android:textSize="20sp"
         tools:layout_editor_absoluteX="150dp"
         tools:layout_editor_absoluteY="16dp" />
 
@@ -20,7 +21,8 @@
         android:id="@+id/resultTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:fontFamily="sans-serif-black"
+        android:textSize="20sp"
         tools:layout_editor_absoluteX="354dp"
         tools:layout_editor_absoluteY="4dp"
         tools:text="25" />
@@ -29,21 +31,22 @@
         android:id="@+id/resultFlow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         app:constraint_referenced_ids="textView,resultTv"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="32dp"
         android:hint="@string/please_enter_the_second_operand"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resultFlow">
@@ -130,6 +133,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
+        android:enabled="false"
         android:onClick="undo"
         android:text="@string/undo"
         android:textColor="@color/black"
@@ -142,6 +146,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
+        android:enabled="false"
         android:onClick="redo"
         android:text="@string/redo"
         android:textColor="@color/black"
@@ -154,6 +159,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
+        android:enabled="false"
         android:onClick="equal"
         android:text="@string/equal"
         android:textColor="@color/teal_200"
@@ -167,7 +173,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow3"
