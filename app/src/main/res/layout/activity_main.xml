@@ -17,7 +17,6 @@
         android:padding="4dp"
         android:textSize="36sp"
         android:gravity="center"
-        android:textColor="@color/black"
         android:hint="@string/result"
         tools:layout_editor_absoluteX="354dp"
         tools:layout_editor_absoluteY="4dp" />
@@ -58,7 +57,7 @@
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/multiplyBrn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
@@ -70,7 +69,7 @@
         tools:layout_editor_absoluteX="210dp"
         tools:layout_editor_absoluteY="150dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/divideBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
@@ -82,7 +81,7 @@
         tools:layout_editor_absoluteX="307dp"
         tools:layout_editor_absoluteY="150dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/minusBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
@@ -94,7 +93,7 @@
         tools:layout_editor_absoluteX="113dp"
         tools:layout_editor_absoluteY="150dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/plusBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
@@ -116,6 +115,7 @@
         android:layout_marginEnd="24dp"
         app:constraint_referenced_ids="plusBtn,minusBtn,multiplyBrn,divideBtn"
         app:flow_horizontalStyle="spread_inside"
+        app:flow_verticalAlign="center"
         app:layout_constraintBottom_toTopOf="@+id/flow3"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -136,7 +136,7 @@
     <Button
         android:id="@+id/equaleBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
         android:enabled="false"
@@ -170,11 +170,12 @@
         android:id="@+id/flow3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="16dp"
         app:constraint_referenced_ids="undoBtn, equaleBtn,redoBtn"
         app:flow_horizontalStyle="spread_inside"
+        app:flow_verticalAlign="center"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="@+id/guideline7"

@@ -116,12 +116,15 @@ class MainActivity : AppCompatActivity() {
     fun redo(view: View) {
         binding.redoBtn.isEnabled = false
         binding.undoBtn.isEnabled = true
+        if(n < allOperHistory.size)
         binding.resultTv.text = allOperHistory[n]
+        else
+            binding.resultTv.text = allOperHistory[n-1]
+
         allOperHistory.add(allOperHistory.lastIndex+1 , allOperHistory[n])
         Log.i("cc", allOperHistory.toString())
         firstOperand = allOperHistory[n].toDouble().roundToInt()
         n++
-
     }
 
     fun equal(view: View) {
@@ -138,13 +141,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun enableAllOperationBtns() {
         binding.multiplyBrn.isEnabled = true
         binding.minusBtn.isEnabled = true
         binding.divideBtn.isEnabled = true
         binding.plusBtn.isEnabled = true
     }
-
 
 }
