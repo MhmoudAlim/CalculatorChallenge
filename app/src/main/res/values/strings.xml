@@ -8,5 +8,5 @@
     <string name="undo">Undo</string>
     <string name="redo">Redo</string>
     <string name="equal">=</string>
-    <string name="result">Result =</string>
+    <string name="result">Result</string>
 </resources>

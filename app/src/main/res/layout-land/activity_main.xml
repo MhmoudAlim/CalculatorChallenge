@@ -26,7 +26,7 @@
         android:id="@+id/resultFlow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:visibility="visible"
         app:constraint_referenced_ids="resultTv"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
@@ -39,7 +39,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
         android:hint="@string/please_enter_the_second_operand"
@@ -113,11 +112,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
         app:constraint_referenced_ids="plusBtn,minusBtn,multiplyBrn,divideBtn"
         app:flow_horizontalStyle="spread_inside"
-        app:layout_constraintBottom_toTopOf="@+id/flow3"
-        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
@@ -164,21 +161,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.53" />
+        app:layout_constraintGuide_percent="0.59" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         app:constraint_referenced_ids="undoBtn, equaleBtn,redoBtn"
         app:flow_horizontalStyle="spread_inside"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintBottom_toTopOf="@+id/collectionView"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/multiplyBrn" />
+        app:layout_constraintStart_toEndOf="@+id/divideBtn"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/collectionView"
@@ -196,7 +193,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.24" />
+        app:layout_constraintGuide_percent="0.38" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
