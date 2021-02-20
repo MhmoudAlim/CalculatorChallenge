@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.result.observe(this, Observer {
             binding.resultTv.text = it
             firstOperand = it.toDouble().roundToInt()
-            allOperHistory.add(allOperHistory.lastIndex+1, it.toString())
-//            allOperHistory.add(n, it.toString())
+//            allOperHistory.add(allOperHistory.lastIndex+1, it.toString())
+            allOperHistory.add(n, it.toString())
             n++
             Log.i("cc", allOperHistory.toString())
         })
@@ -104,8 +104,11 @@ class MainActivity : AppCompatActivity() {
         binding.redoBtn.isEnabled = true
         if (n > 1) {
             binding.resultTv.text = allOperHistory[n - 2]
+            allOperHistory.add(allOperHistory.lastIndex+1 , allOperHistory[n - 2])
+            Log.i("cc", allOperHistory.toString())
             firstOperand = allOperHistory[n - 2].toDouble().roundToInt()
             n--
+
         } else binding.undoBtn.isEnabled = false
 
     }
@@ -113,10 +116,9 @@ class MainActivity : AppCompatActivity() {
     fun redo(view: View) {
         binding.redoBtn.isEnabled = false
         binding.undoBtn.isEnabled = true
-
-
-
         binding.resultTv.text = allOperHistory[n]
+        allOperHistory.add(allOperHistory.lastIndex+1 , allOperHistory[n])
+        Log.i("cc", allOperHistory.toString())
         firstOperand = allOperHistory[n].toDouble().roundToInt()
         n++
 
@@ -127,7 +129,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.calResult(firstOperand, operationSign, secondOperand)
         enableAllOperationBtns()
         binding.displayEt.text.clear()
-
+       n = allOperHistory.lastIndex+1
 //        allhistory.add(n , operationSign + secondOperand)
 //        Log.i("cc" , allhistory[n])
 //        val allhistoryViews = mutableListOf<TextView>()
