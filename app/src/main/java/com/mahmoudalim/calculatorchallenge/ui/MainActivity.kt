@@ -1,4 +1,4 @@
-package com.mahmoudalim.calculatorchallenge
+package com.mahmoudalim.calculatorchallenge.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.mahmoudalim.calculatorchallenge.adapter.MyAdapter
 import com.mahmoudalim.calculatorchallenge.databinding.ActivityMainBinding
 import kotlin.math.roundToInt
 
@@ -20,8 +23,9 @@ class MainActivity : AppCompatActivity() {
     private var firstOperand = 0
     private var secondOperand = 0
     private lateinit var operationSign: String
-    private var n = 1
-    private var allOperHistory = mutableListOf<String>("0")
+    private var n = 0
+    private var allOperHistory = mutableListOf("0")
+    lateinit var historyAdapter: MyAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.result.observe(this, Observer {
             binding.resultTv.text = it
             firstOperand = it.toDouble().roundToInt()
-//            allOperHistory.add(allOperHistory.lastIndex+1, it.toString())
             allOperHistory.add(n, it.toString())
             n++
             Log.i("cc", allOperHistory.toString())
@@ -43,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun inItLayout() {
         binding.displayEt.addTextChangedListener {
-            var input = it.toString()
+            val input = it.toString()
             if (it.toString().isNotEmpty()) {
                 displayIsNotEmpty = true
                 secondOperand = Integer.parseInt(input)
@@ -101,10 +104,12 @@ class MainActivity : AppCompatActivity() {
 
     fun undo(view: View) {
         if (!binding.redoBtn.isEnabled)
-        binding.redoBtn.isEnabled = true
+            binding.redoBtn.isEnabled = true
         if (n > 1) {
             binding.resultTv.text = allOperHistory[n - 2]
-            allOperHistory.add(allOperHistory.lastIndex+1 , allOperHistory[n - 2])
+            allOperHistory.add(allOperHistory.lastIndex + 1, allOperHistory[n - 2])
+            historyAdapter.notifyDataSetChanged()
+
             Log.i("cc", allOperHistory.toString())
             firstOperand = allOperHistory[n - 2].toDouble().roundToInt()
             n--
@@ -116,12 +121,14 @@ class MainActivity : AppCompatActivity() {
     fun redo(view: View) {
         binding.redoBtn.isEnabled = false
         binding.undoBtn.isEnabled = true
-        if(n < allOperHistory.size)
-        binding.resultTv.text = allOperHistory[n]
+        if (n < allOperHistory.size)
+            binding.resultTv.text = allOperHistory[n]
         else
-            binding.resultTv.text = allOperHistory[n-1]
+            binding.resultTv.text = allOperHistory[n - 1]
 
-        allOperHistory.add(allOperHistory.lastIndex+1 , allOperHistory[n])
+        allOperHistory.add(allOperHistory.lastIndex + 1, allOperHistory[n])
+        historyAdapter.notifyDataSetChanged()
+
         Log.i("cc", allOperHistory.toString())
         firstOperand = allOperHistory[n].toDouble().roundToInt()
         n++
@@ -132,13 +139,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.calResult(firstOperand, operationSign, secondOperand)
         enableAllOperationBtns()
         binding.displayEt.text.clear()
-       n = allOperHistory.lastIndex+1
-//        allhistory.add(n , operationSign + secondOperand)
-//        Log.i("cc" , allhistory[n])
-//        val allhistoryViews = mutableListOf<TextView>()
-//        allhistoryViews.add(n , TextView(this))
-//        allhistoryViews[n].text = allhistory[n]
+        n = allOperHistory.lastIndex + 1
 
+        if (allOperHistory.size > 0)
+            setUpRecyclerView()
     }
 
     private fun enableAllOperationBtns() {
@@ -147,5 +151,14 @@ class MainActivity : AppCompatActivity() {
         binding.divideBtn.isEnabled = true
         binding.plusBtn.isEnabled = true
     }
+
+    private fun setUpRecyclerView() {
+        historyAdapter = MyAdapter(allOperHistory)
+        binding.historyRv.apply {
+            layoutManager =
+                LinearLayoutManager(this@MainActivity, RecyclerView.HORIZONTAL, false)
+            adapter = historyAdapter
+            }
+        }
 
 }

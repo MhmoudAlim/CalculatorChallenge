@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
 
 
@@ -13,8 +13,9 @@
         android:id="@+id/resultTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
         android:padding="4dp"
+        android:fontFamily="@font/orbitron_bold"
+        android:maxLines="1"
         android:textSize="36sp"
         android:gravity="center"
         android:hint="@string/result"
@@ -185,7 +186,17 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0" >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/historyRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
