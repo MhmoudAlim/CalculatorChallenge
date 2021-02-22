@@ -34,15 +34,12 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainVM::class.java)
         inItLayout()
         viewModel.result.observe(this, Observer {
-            if (operationsHistory[0] == "0") {
-                binding.resultTv.text = it
-                firstOperand = it.toDouble().roundToInt()
-                if (n != 0)
-                    operationsHistory.add(n, it.toString())
-            } else operationsHistory.removeAt(0)
+            binding.resultTv.text = it
+            firstOperand = it.toDouble().roundToInt()
+            if (n != 0)
+                operationsHistory.add(n, it.toString())
             viewModel.addToHistory(operationsHistory)
             n++
-            Log.i("cc", "ONCREATE ${operationsHistory.toString()}")
             historyAdapter.notifyDataSetChanged()
         })
     }
@@ -63,12 +60,10 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.resultHistory.observe(this, Observer {
             operationsHistory = it
-            Log.i("cc", "list updated to (INIT) ${it}")
             binding.resultTv.text = operationsHistory[operationsHistory.lastIndex]
             firstOperand = operationsHistory[operationsHistory.lastIndex].toDouble().roundToInt()
             setUpRecyclerView()
         })
-
     }
 
     fun multiply(view: View) {
@@ -81,7 +76,6 @@ class MainActivity : AppCompatActivity() {
             binding.divideBtn.isEnabled = false
         }
     }
-
 
     fun divide(view: View) {
         operationSign = "/"
@@ -117,6 +111,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun undo(view: View) {
+        view.hideKeyboard()
         if (!binding.redoBtn.isEnabled)
             binding.redoBtn.isEnabled = true
         if (n > 1) {
@@ -128,12 +123,10 @@ class MainActivity : AppCompatActivity() {
             firstOperand = operationsHistory[n - 2].toDouble().roundToInt()
             n--
         } else binding.undoBtn.isEnabled = false
-        view.hideKeyboard()
-
-
     }
 
     fun redo(view: View) {
+        view.hideKeyboard()
         binding.redoBtn.isEnabled = false
         binding.undoBtn.isEnabled = true
         if (n < operationsHistory.size)
@@ -142,14 +135,12 @@ class MainActivity : AppCompatActivity() {
         operationsHistory.add(operationsHistory.lastIndex + 1, operationsHistory[n])
         viewModel.addToHistory(operationsHistory)
         historyAdapter.notifyDataSetChanged()
-        Log.i("cc", operationsHistory.toString())
         firstOperand = operationsHistory[n].toDouble().roundToInt()
         n++
-        view.hideKeyboard()
-
     }
 
     fun equal(view: View) {
+        view.hideKeyboard()
         binding.undoBtn.isEnabled = true
         viewModel.calResult(firstOperand, operationSign, secondOperand)
         enableAllOperationBtns()
@@ -157,7 +148,6 @@ class MainActivity : AppCompatActivity() {
         n = operationsHistory.lastIndex + 1
         viewModel.addToHistory(operationsHistory)
         setUpRecyclerView()
-        view.hideKeyboard()
 
     }
 
@@ -167,7 +157,6 @@ class MainActivity : AppCompatActivity() {
         binding.divideBtn.isEnabled = true
         binding.plusBtn.isEnabled = true
     }
-
 
     private fun setUpRecyclerView() {
         historyAdapter = MyAdapter(operationsHistory)
@@ -180,10 +169,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun View.hideKeyboard() {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(windowToken, 0)
+        val keyboard = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        keyboard.hideSoftInputFromWindow(windowToken, 0)
     }
-
 
 }
 

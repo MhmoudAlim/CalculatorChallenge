@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mahmoudalim.calculatorchallenge.R
 
-class MyAdapter(var history: MutableList<String>) :
+class MyAdapter(val history: MutableList<String>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

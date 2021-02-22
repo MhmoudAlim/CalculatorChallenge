@@ -23,10 +23,6 @@ class MainVM : ViewModel() {
         result.postValue(calculation)
     }
 
-    fun addToHistory(operationResult : MutableList<String> ){
-          var operationsHistory = operationResult
-
-        resultHistory.postValue(operationsHistory)
-    }
-
+    fun addToHistory(operationResult : MutableList<String> ) =
+        resultHistory.postValue(operationResult)
 }

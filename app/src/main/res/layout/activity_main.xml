@@ -55,9 +55,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
+        android:fontFamily="sans-serif-black"
         android:onClick="multiply"
         android:text="@string/multiply"
-        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textSize="18sp"
         tools:layout_editor_absoluteX="210dp"
         tools:layout_editor_absoluteY="150dp" />
 
@@ -67,9 +69,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
+        android:fontFamily="sans-serif-black"
         android:onClick="divide"
         android:text="@string/divide"
-        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textSize="18sp"
         tools:layout_editor_absoluteX="307dp"
         tools:layout_editor_absoluteY="150dp" />
 
@@ -79,9 +83,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
+        android:fontFamily="sans-serif-black"
         android:onClick="minus"
         android:text="@string/minus"
-        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textSize="18sp"
         tools:layout_editor_absoluteX="113dp"
         tools:layout_editor_absoluteY="150dp" />
 
@@ -91,9 +97,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
+        android:fontFamily="sans-serif-black"
         android:onClick="plus"
         android:text="@string/plus"
-        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textSize="18sp"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="150dp" />
 
@@ -106,7 +114,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         app:constraint_referenced_ids="plusBtn,minusBtn,multiplyBrn,divideBtn"
-        app:flow_horizontalStyle="spread_inside"
+        app:flow_horizontalGap="8dp"
+        app:flow_horizontalStyle="spread"
         app:flow_verticalAlign="center"
         app:layout_constraintBottom_toTopOf="@+id/flow3"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
@@ -122,8 +131,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
         android:enabled="false"
+        android:fontFamily="sans-serif"
         android:onClick="undo"
         android:text="@string/undo"
+        android:textAlignment="center"
         tools:layout_editor_absoluteX="136dp"
         tools:layout_editor_absoluteY="286dp" />
 
@@ -134,9 +145,11 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
         android:enabled="false"
+        android:fontFamily="sans-serif-black"
         android:onClick="equal"
         android:text="@string/equal"
-        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textSize="18sp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="286dp"
         tools:layout_editor_absoluteY="221dp" />
@@ -148,8 +161,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
         android:enabled="false"
+        android:fontFamily="sans-serif"
         android:onClick="redo"
         android:text="@string/redo"
+        android:textAlignment="center"
         tools:layout_editor_absoluteX="264dp"
         tools:layout_editor_absoluteY="286dp" />
 
@@ -168,7 +183,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         app:constraint_referenced_ids="undoBtn, equaleBtn,redoBtn"
-        app:flow_horizontalStyle="spread_inside"
+        app:flow_horizontalGap="8dp"
+        app:flow_horizontalStyle="spread"
         app:flow_verticalAlign="center"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
@@ -205,7 +221,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.24" />
+        app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
