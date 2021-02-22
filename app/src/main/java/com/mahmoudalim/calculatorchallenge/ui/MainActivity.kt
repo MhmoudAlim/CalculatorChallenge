@@ -17,15 +17,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var viewModel: MainVM
-    private var operationIsSelected = false
-    private var oneOperationSelected = false
-    private var displayIsNotEmpty = false
     private var firstOperand = 0
     private var secondOperand = 0
     private lateinit var operationSign: String
     private var n = 0
-    private var allOperHistory = mutableListOf("0")
-    lateinit var historyAdapter: MyAdapter
+    private var operationsHistory = mutableListOf("0")
+    private lateinit var historyAdapter: MyAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,14 +32,20 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainVM::class.java)
         inItLayout()
         viewModel.result.observe(this, Observer {
+            if (operationsHistory[0] == "0")
             binding.resultTv.text = it
             firstOperand = it.toDouble().roundToInt()
-            allOperHistory.add(n, it.toString())
+            operationsHistory.add(n, it.toString())
+            viewModel.addToHistory(operationsHistory)
             n++
-            Log.i("cc", allOperHistory.toString())
+            Log.i("cc", operationsHistory.toString())
         })
 
     }
+
+    private var operationIsSelected = false
+    private var oneOperationSelected = false
+    private var displayIsNotEmpty = false
 
     private fun inItLayout() {
         binding.displayEt.addTextChangedListener {
@@ -53,6 +56,13 @@ class MainActivity : AppCompatActivity() {
                 binding.equaleBtn.isEnabled = displayIsNotEmpty && operationIsSelected
             } else binding.equaleBtn.isEnabled = false
         }
+            viewModel.resultHistory.observe(this, Observer {
+                operationsHistory = it
+                Log.i("cc" ,"list updated to ${it.toString()}")
+                binding.resultTv.text = operationsHistory[operationsHistory.lastIndex]
+                firstOperand = operationsHistory[operationsHistory.lastIndex].toDouble().roundToInt()
+
+            })
     }
 
 
@@ -99,19 +109,19 @@ class MainActivity : AppCompatActivity() {
             binding.minusBtn.isEnabled = false
             binding.divideBtn.isEnabled = false
         }
-
     }
 
     fun undo(view: View) {
         if (!binding.redoBtn.isEnabled)
             binding.redoBtn.isEnabled = true
         if (n > 1) {
-            binding.resultTv.text = allOperHistory[n - 2]
-            allOperHistory.add(allOperHistory.lastIndex + 1, allOperHistory[n - 2])
+            binding.resultTv.text = operationsHistory[n - 2]
+            operationsHistory.add(operationsHistory.lastIndex + 1, operationsHistory[n - 2])
             historyAdapter.notifyDataSetChanged()
+            viewModel.addToHistory(operationsHistory)
 
-            Log.i("cc", allOperHistory.toString())
-            firstOperand = allOperHistory[n - 2].toDouble().roundToInt()
+            Log.i("cc", operationsHistory.toString())
+            firstOperand = operationsHistory[n - 2].toDouble().roundToInt()
             n--
 
         } else binding.undoBtn.isEnabled = false
@@ -121,16 +131,14 @@ class MainActivity : AppCompatActivity() {
     fun redo(view: View) {
         binding.redoBtn.isEnabled = false
         binding.undoBtn.isEnabled = true
-        if (n < allOperHistory.size)
-            binding.resultTv.text = allOperHistory[n]
-        else
-            binding.resultTv.text = allOperHistory[n - 1]
+        if (n < operationsHistory.size)
+            binding.resultTv.text = operationsHistory[n]
 
-        allOperHistory.add(allOperHistory.lastIndex + 1, allOperHistory[n])
+        operationsHistory.add(operationsHistory.lastIndex + 1, operationsHistory[n])
+        viewModel.addToHistory(operationsHistory)
         historyAdapter.notifyDataSetChanged()
-
-        Log.i("cc", allOperHistory.toString())
-        firstOperand = allOperHistory[n].toDouble().roundToInt()
+        Log.i("cc", operationsHistory.toString())
+        firstOperand = operationsHistory[n].toDouble().roundToInt()
         n++
     }
 
@@ -139,9 +147,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.calResult(firstOperand, operationSign, secondOperand)
         enableAllOperationBtns()
         binding.displayEt.text.clear()
-        n = allOperHistory.lastIndex + 1
-
-        if (allOperHistory.size > 0)
+        n = operationsHistory.lastIndex + 1
+        viewModel.addToHistory(operationsHistory)
+        if (operationsHistory.size > 0)
             setUpRecyclerView()
     }
 
@@ -153,7 +161,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView() {
-        historyAdapter = MyAdapter(allOperHistory)
+        historyAdapter = MyAdapter(operationsHistory)
         binding.historyRv.apply {
             layoutManager =
                 LinearLayoutManager(this@MainActivity, RecyclerView.HORIZONTAL, false)

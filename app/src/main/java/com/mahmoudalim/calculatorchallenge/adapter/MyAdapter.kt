@@ -15,7 +15,6 @@ class MyAdapter(var history: MutableList<String>) :
         val historyTv: TextView = itemView.findViewById(R.id.hisoryTv)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view: View = inflater.inflate(R.layout.history_item, parent, false)

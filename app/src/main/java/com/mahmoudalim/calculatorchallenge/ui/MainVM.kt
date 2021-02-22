@@ -8,6 +8,7 @@ class MainVM : ViewModel() {
 
     private lateinit var calculation: String
     val result: MutableLiveData<String> = MutableLiveData()
+    val resultHistory : MutableLiveData<MutableList<String>> = MutableLiveData()
 
     fun calResult(firstOperand: Int, operationSign: String, secondOperand: Int) {
         when (operationSign) {
@@ -20,6 +21,12 @@ class MainVM : ViewModel() {
 
 
         result.postValue(calculation)
+    }
+
+    fun addToHistory(operationResult : MutableList<String> ){
+          var operationsHistory = operationResult
+
+        resultHistory.postValue(operationsHistory)
     }
 
 }
