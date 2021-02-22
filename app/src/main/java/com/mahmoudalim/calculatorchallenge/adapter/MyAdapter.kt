@@ -11,7 +11,6 @@ class MyAdapter(var history: MutableList<String>) :
     RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         val historyTv: TextView = itemView.findViewById(R.id.hisoryTv)
     }
 

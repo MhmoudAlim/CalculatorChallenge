@@ -12,25 +12,17 @@
         android:id="@+id/resultTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/orbitron_bold"
         android:gravity="center"
         android:hint="@string/result"
         android:maxLines="1"
         android:padding="4dp"
         android:textSize="36sp"
-        tools:layout_editor_absoluteX="354dp"
-        tools:layout_editor_absoluteY="4dp" />
-
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/resultFlow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:visibility="visible"
-        app:constraint_referenced_ids="resultTv"
-        app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -38,14 +30,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
         android:hint="@string/please_enter_the_second_operand"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/resultFlow">
+        app:layout_constraintTop_toTopOf="@+id/guideline5">
 
         <EditText
             android:id="@+id/displayEt"
@@ -60,7 +52,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/multiplyBrn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
         android:onClick="multiply"
@@ -72,7 +64,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/divideBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
         android:onClick="divide"
@@ -84,7 +76,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/minusBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
         android:onClick="minus"
@@ -96,7 +88,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/plusBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
         android:onClick="plus"
@@ -118,13 +110,15 @@
         app:flow_verticalAlign="center"
         app:layout_constraintBottom_toTopOf="@+id/flow3"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        app:layout_constraintVertical_bias="0.196" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/undoBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
         android:enabled="false"
@@ -133,7 +127,7 @@
         tools:layout_editor_absoluteX="136dp"
         tools:layout_editor_absoluteY="286dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/equaleBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="0dp"
@@ -147,10 +141,10 @@
         tools:layout_editor_absoluteX="286dp"
         tools:layout_editor_absoluteY="221dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/redoBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_background"
         android:enabled="false"
@@ -164,7 +158,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.53" />
+        app:layout_constraintGuide_percent="0.48" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow3"
@@ -178,28 +172,32 @@
         app:flow_verticalAlign="center"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/multiplyBrn" />
+        app:layout_constraintTop_toBottomOf="@+id/multiplyBrn"
+        app:layout_constraintVertical_bias="0.346" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/collectionView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/historyRv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -228,6 +226,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.01" />
+        app:layout_constraintGuide_percent="0.13" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

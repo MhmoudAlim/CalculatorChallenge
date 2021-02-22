@@ -57,8 +57,9 @@
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/multiplyBrn"
+ <com.google.android.material.button.MaterialButton
+
+    android:id="@+id/multiplyBrn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,7 +70,7 @@
         tools:layout_editor_absoluteX="210dp"
         tools:layout_editor_absoluteY="150dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/divideBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
@@ -81,7 +82,7 @@
         tools:layout_editor_absoluteX="307dp"
         tools:layout_editor_absoluteY="150dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/minusBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
@@ -93,7 +94,7 @@
         tools:layout_editor_absoluteX="113dp"
         tools:layout_editor_absoluteY="150dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/plusBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
@@ -106,19 +107,7 @@
         tools:layout_editor_absoluteY="150dp" />
 
 
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        app:constraint_referenced_ids="plusBtn,minusBtn,multiplyBrn,divideBtn"
-        app:flow_horizontalStyle="spread_inside"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/undoBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
@@ -130,7 +119,7 @@
         tools:layout_editor_absoluteX="136dp"
         tools:layout_editor_absoluteY="286dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/equaleBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
@@ -144,7 +133,7 @@
         tools:layout_editor_absoluteX="286dp"
         tools:layout_editor_absoluteY="221dp" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/redoBtn"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
@@ -156,26 +145,27 @@
         tools:layout_editor_absoluteX="264dp"
         tools:layout_editor_absoluteY="286dp" />
 
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:constraint_referenced_ids="plusBtn,minusBtn,multiplyBrn,divideBtn,undoBtn, equaleBtn,redoBtn"
+        app:flow_horizontalAlign="center"
+        app:flow_horizontalStyle="spread"
+        app:flow_verticalAlign="center"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.59" />
-
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        app:constraint_referenced_ids="undoBtn, equaleBtn,redoBtn"
-        app:flow_horizontalStyle="spread_inside"
-        app:layout_constraintBottom_toTopOf="@+id/collectionView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toEndOf="@+id/divideBtn"
-        app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/collectionView"
