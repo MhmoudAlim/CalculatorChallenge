@@ -65,6 +65,8 @@ class MainActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
             binding.resultTv.text = operationsHistory[operationsHistory.lastIndex]
             firstOperand = operationsHistory[operationsHistory.lastIndex].toDouble().roundToInt()
             historyAdapter.notifyDataSetChanged()
+            binding.historyRv.scrollToPosition(historyAdapter.itemCount - 1)
+
         })
     }
 
@@ -120,6 +122,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
             binding.resultTv.text = operationsHistory[n - 2]
             operationsHistory.add(operationsHistory.lastIndex + 1, operationsHistory[n - 2])
             historyAdapter.notifyDataSetChanged()
+            binding.historyRv.scrollToPosition(historyAdapter.itemCount - 1)
             viewModel.addToHistory(operationsHistory)
             Log.i("cc", operationsHistory.toString())
             firstOperand = operationsHistory[n - 2].toDouble().roundToInt()
@@ -137,6 +140,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
         operationsHistory.add(operationsHistory.lastIndex + 1, operationsHistory[n])
         viewModel.addToHistory(operationsHistory)
         historyAdapter.notifyDataSetChanged()
+        binding.historyRv.scrollToPosition(historyAdapter.itemCount - 1)
         firstOperand = operationsHistory[n].toDouble().roundToInt()
         n++
     }
@@ -176,6 +180,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
         if (position > 0) {
             val clickedItem = operationsHistory[position - 1]
             binding.resultTv.text = clickedItem
+            firstOperand = clickedItem.toDouble().roundToInt()
         }
     }
 
