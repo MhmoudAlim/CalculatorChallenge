@@ -2,11 +2,19 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'org.jetbrains.dokka-android'
 }
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+
+
+// Dokka ext engine for creating the JavaDocs in Kotlin
+    dokka {
+        outputFormat = 'html'
+        outputDirectory = "build/javadoc"
+    }
 
     defaultConfig {
         applicationId "com.mahmoudalim.calculatorchallenge"
@@ -46,6 +54,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Google Truth Library for Unit testing @Assertion
     testImplementation "com.google.truth:truth:1.1.2"
     androidTestImplementation "com.google.truth:truth:1.1.2"
 
