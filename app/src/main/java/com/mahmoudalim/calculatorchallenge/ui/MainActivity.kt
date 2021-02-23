@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mahmoudalim.calculatorchallenge.adapter.MyAdapter
 import com.mahmoudalim.calculatorchallenge.databinding.ActivityMainBinding
+import com.mahmoudalim.calculatorchallenge.slideInRight
 import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
@@ -26,13 +27,13 @@ class MainActivity : AppCompatActivity() {
     private var operationsHistory = mutableListOf("0")
     private lateinit var historyAdapter: MyAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(MainVM::class.java)
         inItLayout()
+
         viewModel.result.observe(this, Observer {
             binding.resultTv.text = it
             firstOperand = it.toDouble().roundToInt()
@@ -62,7 +63,8 @@ class MainActivity : AppCompatActivity() {
             operationsHistory = it
             binding.resultTv.text = operationsHistory[operationsHistory.lastIndex]
             firstOperand = operationsHistory[operationsHistory.lastIndex].toDouble().roundToInt()
-            setUpRecyclerView()
+//            setUpRecyclerView()
+            historyAdapter.notifyDataSetChanged()
         })
     }
 
@@ -125,13 +127,13 @@ class MainActivity : AppCompatActivity() {
         } else binding.undoBtn.isEnabled = false
     }
 
+
     fun redo(view: View) {
         view.hideKeyboard()
         binding.redoBtn.isEnabled = false
         binding.undoBtn.isEnabled = true
         if (n < operationsHistory.size)
             binding.resultTv.text = operationsHistory[n]
-
         operationsHistory.add(operationsHistory.lastIndex + 1, operationsHistory[n])
         viewModel.addToHistory(operationsHistory)
         historyAdapter.notifyDataSetChanged()
@@ -140,18 +142,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun equal(view: View) {
-        view.hideKeyboard()
         binding.undoBtn.isEnabled = true
         viewModel.calResult(firstOperand, operationSign, secondOperand)
-        enableAllOperationBtns()
-        binding.displayEt.text.clear()
         n = operationsHistory.lastIndex + 1
         viewModel.addToHistory(operationsHistory)
+
+        afterEveryOperationButtonRestore()
         setUpRecyclerView()
+        view.hideKeyboard()
 
     }
 
-    private fun enableAllOperationBtns() {
+    private fun afterEveryOperationButtonRestore() {
+        binding.displayEt.text.clear()
         binding.multiplyBrn.isEnabled = true
         binding.minusBtn.isEnabled = true
         binding.divideBtn.isEnabled = true
@@ -164,6 +167,7 @@ class MainActivity : AppCompatActivity() {
             layoutManager =
                 LinearLayoutManager(this@MainActivity, RecyclerView.HORIZONTAL, false)
             adapter = historyAdapter
+            slideInRight(100L , 100L)
             scrollToPosition(historyAdapter.itemCount - 1)
         }
     }
