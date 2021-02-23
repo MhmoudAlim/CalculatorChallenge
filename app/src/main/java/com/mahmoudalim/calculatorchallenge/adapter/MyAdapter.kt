@@ -7,11 +7,31 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mahmoudalim.calculatorchallenge.R
 
-class MyAdapter(val history: MutableList<String>) :
-    RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class MyAdapter(
+    private val history: MutableList<String>,
+    private val listener: OnItemClickListener
+) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
+
+
         val historyTv: TextView = itemView.findViewById(R.id.hisoryTv)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position: Int = adapterPosition
+            if (position != RecyclerView.NO_POSITION)
+                listener.onItemClick(position)
+        }
+
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

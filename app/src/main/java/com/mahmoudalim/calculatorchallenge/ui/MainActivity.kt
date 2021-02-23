@@ -16,7 +16,7 @@ import com.mahmoudalim.calculatorchallenge.databinding.ActivityMainBinding
 import com.mahmoudalim.calculatorchallenge.slideInRight
 import kotlin.math.roundToInt
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var viewModel: MainVM
@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
     private var displayIsNotEmpty = false
 
     private fun inItLayout() {
+        binding.displayEt.isEnabled = true
         binding.displayEt.addTextChangedListener {
             val input = it.toString()
             if (it.toString().isNotEmpty()) {
@@ -63,7 +64,6 @@ class MainActivity : AppCompatActivity() {
             operationsHistory = it
             binding.resultTv.text = operationsHistory[operationsHistory.lastIndex]
             firstOperand = operationsHistory[operationsHistory.lastIndex].toDouble().roundToInt()
-//            setUpRecyclerView()
             historyAdapter.notifyDataSetChanged()
         })
     }
@@ -162,13 +162,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView() {
-        historyAdapter = MyAdapter(operationsHistory)
+        historyAdapter = MyAdapter(operationsHistory, this)
         binding.historyRv.apply {
             layoutManager =
                 LinearLayoutManager(this@MainActivity, RecyclerView.HORIZONTAL, false)
             adapter = historyAdapter
-            slideInRight(100L , 100L)
+            slideInRight(100L, 100L)
             scrollToPosition(historyAdapter.itemCount - 1)
+        }
+    }
+
+    override fun onItemClick(position: Int) {
+        if (position > 0) {
+            val clickedItem = operationsHistory[position - 1]
+            binding.resultTv.text = clickedItem
         }
     }
 
@@ -177,5 +184,5 @@ class MainActivity : AppCompatActivity() {
         keyboard.hideSoftInputFromWindow(windowToken, 0)
     }
 
-}
 
+}
